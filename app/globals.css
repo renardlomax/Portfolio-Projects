@@ -1,3 +1,7 @@
+/* --- Tailwind: must be first --- */
+@import "tailwindcss";
+
+/* --- Your custom globals (keep these AFTER Tailwind) --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
