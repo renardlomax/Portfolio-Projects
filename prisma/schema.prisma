@@ -1,0 +1,44 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // swap to "postgresql" later for prod
+  url      = env("DATABASE_URL")
+}
+
+enum Vertical {
+  NEW_BUSINESS
+  NEW_HOMEOWNER
+}
+
+model Lead {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+
+  vertical   Vertical
+  name       String
+  email      String
+  phone      String?
+  state      String
+  city       String?
+  zip        String?
+
+  // keep your previous fields so nothing is lost
+  company    String?
+  website    String?
+  service    String?
+  budget     String?
+  message    String?
+
+  // optional attribution
+  source      String?
+  utmMedium   String?
+  utmSource   String?
+  utmCampaign String?
+
+  @@index([vertical, state, city])
+
+}
